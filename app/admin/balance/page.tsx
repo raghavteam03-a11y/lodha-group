@@ -29,6 +29,7 @@ export default function AdminBalancePage() {
     const [remarks, setRemarks] = useState<{ [key: string]: string }>({})
     const [error, setError] = useState('')
     const [expandedUser, setExpandedUser] = useState<string | null>(null)
+    const router = useRouter()
 
     useEffect(() => {
         fetchUsers()
@@ -86,6 +87,20 @@ export default function AdminBalancePage() {
         }
     }
 
+    const handleLogout = async () => {
+        try {
+            const res = await fetch('/api/admin/logout', { method: 'POST' })
+            if (res.ok) {
+                router.push('/admin/login')
+            } else {
+                alert('Logout failed')
+            }
+        } catch (err) {
+            console.error('Logout error:', err)
+            alert('An error occurred during logout')
+        }
+    }
+
     if (loading) {
         return (
             <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
@@ -97,11 +112,22 @@ export default function AdminBalancePage() {
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white p-8">
             <div className="max-w-7xl mx-auto">
-                <header className="mb-12">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                        Admin Balance Management
-                    </h1>
-                    <p className="text-gray-400 mt-2">Oversee user accounts and manage financial transactions efficiently.</p>
+                <header className="mb-12 flex justify-between items-start">
+                    <div>
+                        <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                            Admin Balance Management
+                        </h1>
+                        <p className="text-gray-400 mt-2">Oversee user accounts and manage financial transactions efficiently.</p>
+                    </div>
+                    <button
+                        onClick={handleLogout}
+                        className="bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white px-6 py-2 rounded-xl border border-white/10 transition-all font-medium flex items-center gap-2"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Logout
+                    </button>
                 </header>
 
                 {error && (
