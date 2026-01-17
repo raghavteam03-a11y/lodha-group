@@ -24,16 +24,17 @@ export async function POST(request: Request) {
             if (amount !== undefined) {
                 const numericAmount = parseFloat(amount)
                 if (!isNaN(numericAmount)) {
-                    const prevBalance = user.balance
-                    const newBalance = prevBalance + numericAmount
-                    updateData.balance = newBalance
+                    const prevValue = user.balance
+                    const newValue = prevValue + numericAmount
+                    updateData.balance = newValue
 
-                    await tx.balanceHistory.create({
+                    await tx.fundHistory.create({
                         data: {
                             userId,
+                            type: 'BALANCE',
                             amount: numericAmount,
-                            prevBalance,
-                            newBalance,
+                            prevValue,
+                            newValue,
                             remark: remark || `Added ${numericAmount} to balance`
                         }
                     })
@@ -43,14 +44,42 @@ export async function POST(request: Request) {
             if (recharge !== undefined) {
                 const numericRecharge = parseFloat(recharge)
                 if (!isNaN(numericRecharge)) {
-                    updateData.recharge = numericRecharge
+                    const prevValue = user.recharge || 0
+                    const newValue = numericRecharge 
+                    const diff = newValue - prevValue
+                    updateData.recharge = newValue
+
+                    await tx.fundHistory.create({
+                        data: {
+                            userId,
+                            type: 'RECHARGE',
+                            amount: diff,
+                            prevValue,
+                            newValue,
+                            remark: remark || `Recharge updated from ${prevValue} to ${newValue}`
+                        }
+                    })
                 }
             }
 
             if (income !== undefined) {
                 const numericIncome = parseFloat(income)
                 if (!isNaN(numericIncome)) {
-                    updateData.income = numericIncome
+                    const prevValue = user.income || 0
+                    const newValue = numericIncome
+                    const diff = newValue - prevValue
+                    updateData.income = newValue
+
+                    await tx.fundHistory.create({
+                        data: {
+                            userId,
+                            type: 'INCOME',
+                            amount: diff,
+                            prevValue,
+                            newValue,
+                            remark: remark || `Income updated from ${prevValue} to ${newValue}`
+                        }
+                    })
                 }
             }
 

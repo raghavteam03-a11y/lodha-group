@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-interface BalanceHistory {
+interface FundHistory {
     id: string
+    type: 'BALANCE' | 'RECHARGE' | 'INCOME'
     amount: number
-    prevBalance: number
-    newBalance: number
+    prevValue: number
+    newValue: number
     remark: string
     createdAt: string
 }
@@ -20,7 +21,7 @@ interface User {
     balance: number
     recharge: number
     income: number
-    balanceHistory: BalanceHistory[]
+    fundHistory: FundHistory[]
 }
 
 export default function AdminBalancePage() {
@@ -236,23 +237,31 @@ export default function AdminBalancePage() {
                                     {expandedUser === user.id && (
                                         <tr className="bg-black/40 border-t border-white/5">
                                             <td colSpan={4} className="px-10 py-6">
-                                                <h3 className="text-sm font-semibold text-indigo-400 uppercase tracking-widest mb-4">Transaction History</h3>
-                                                {user.balanceHistory.length > 0 ? (
+                                                <h3 className="text-sm font-semibold text-indigo-400 uppercase tracking-widest mb-4">Collective Fund History</h3>
+                                                {user.fundHistory.length > 0 ? (
                                                     <div className="space-y-3">
-                                                        {user.balanceHistory.map(history => (
+                                                        {user.fundHistory.map(history => (
                                                             <div key={history.id} className="flex justify-between items-center bg-white/[0.02] p-3 rounded-lg border border-white/5">
-                                                                <div>
-                                                                    <div className="text-sm font-medium">{history.remark}</div>
-                                                                    <div className="text-xs text-gray-500 lowercase">
-                                                                        {new Date(history.createdAt).toLocaleString()}
+                                                                <div className="flex items-center gap-4">
+                                                                    <div className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-tighter ${history.type === 'BALANCE' ? 'bg-green-500/20 text-green-400' :
+                                                                            history.type === 'RECHARGE' ? 'bg-blue-500/20 text-blue-400' :
+                                                                                'bg-purple-500/20 text-purple-400'
+                                                                        }`}>
+                                                                        {history.type}
+                                                                    </div>
+                                                                    <div>
+                                                                        <div className="text-sm font-medium">{history.remark}</div>
+                                                                        <div className="text-xs text-gray-500 lowercase">
+                                                                            {new Date(history.createdAt).toLocaleString()}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div className="text-right">
                                                                     <div className={`font-bold ${history.amount >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                                                                        {history.amount >= 0 ? '+' : ''}{history.amount}
+                                                                        {history.amount >= 0 ? '+' : ''}{history.amount.toLocaleString()}
                                                                     </div>
                                                                     <div className="text-[10px] text-gray-500">
-                                                                        Balance: ₹{history.prevBalance} → ₹{history.newBalance}
+                                                                        {history.prevValue.toLocaleString()} → {history.newValue.toLocaleString()}
                                                                     </div>
                                                                 </div>
                                                             </div>

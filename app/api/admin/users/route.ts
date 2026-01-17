@@ -8,11 +8,11 @@ export async function GET() {
                 createdAt: 'desc'
             },
             include: {
-                balanceHistory: {
+                fundHistory: {
                     orderBy: {
                         createdAt: 'desc'
                     },
-                    take: 5
+                    take: 10
                 }
             }
         })
