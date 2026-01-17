@@ -167,6 +167,9 @@ export default function AdminBalancePage() {
                                             <div className="text-gray-500 text-sm font-mono cursor-pointer hover:text-indigo-400 transition-colors">
                                                 {user.mobile} • {user.role}
                                             </div>
+                                            <div className="mt-2 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer bg-indigo-500/10 px-2 py-1 rounded border border-indigo-500/20">
+                                                {expandedUser === user.id ? 'Hide History' : 'Show History'}
+                                            </div>
                                         </td>
                                         <td className="px-6 py-6">
                                             <div className="space-y-1">
@@ -207,7 +210,7 @@ export default function AdminBalancePage() {
                                                 <div>
                                                     <input
                                                         type="number"
-                                                        placeholder="Set Recharge"
+                                                        placeholder="Add Recharge"
                                                         value={recharges[user.id] || ''}
                                                         onChange={(e) => setRecharges(prev => ({ ...prev, [user.id]: e.target.value }))}
                                                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-gray-600 border-blue-500/20"
@@ -216,7 +219,7 @@ export default function AdminBalancePage() {
                                                 <div>
                                                     <input
                                                         type="number"
-                                                        placeholder="Set Income"
+                                                        placeholder="Add Income"
                                                         value={incomes[user.id] || ''}
                                                         onChange={(e) => setIncomes(prev => ({ ...prev, [user.id]: e.target.value }))}
                                                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all placeholder:text-gray-600 border-purple-500/20"

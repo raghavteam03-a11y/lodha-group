@@ -10,7 +10,7 @@ export default function RechargePage() {
   const [selectedChannel, setSelectedChannel] = useState<'A' | 'B'>('A');
   const [balance, setBalance] = useState(0);
 
-  const quickAmounts = [2000, 875, 295, 625, 1000, 1200, 1500, 2200, 3300];
+  const quickAmounts = [600, 1000, 2000, 5000, 10000, 20000, 30000, 40000, 50000];
 
   useEffect(() => {
     // Fetch user and balance
@@ -34,8 +34,8 @@ export default function RechargePage() {
 
   const handleRecharge = () => {
     const amount = parseInt(customAmount);
-    if (isNaN(amount) || amount < 295) {
-      alert('Minimum recharge amount is ₹295');
+    if (isNaN(amount) || amount < 550) {
+      alert('Minimum recharge amount is ₹550');
       return;
     }
     // Simulation for now
@@ -232,7 +232,7 @@ export default function RechargePage() {
           </h3>
           <div className="space-y-4">
              {[
-               "Minimum top-up amount is ₹295.",
+               "Minimum top-up amount is ₹550.",
                "Please pay and submit UTR within the given time.",
                "Each payment request is single-use. Do not reuse details."
              ].map((text, idx) => (

@@ -54,8 +54,7 @@ export default function WithdrawalPage() {
   };
 
   const calculateReceive = (amt: number) => {
-    // 10% platform fee
-    return Math.round(amt * 0.9);
+    return amt;
   };
 
   const isWithdrawalTimeValid = () => {
@@ -89,10 +88,10 @@ export default function WithdrawalPage() {
       return;
     }
 
-    if (isNaN(withdrawAmt) || withdrawAmt < 190) {
+    if (isNaN(withdrawAmt) || withdrawAmt < 1000) {
       setPopup({
         show: true,
-        message: 'Minimum withdrawal amount is ₹190.',
+        message: 'Minimum withdrawal amount is ₹1000.',
         type: 'error'
       });
       return;
@@ -355,7 +354,7 @@ export default function WithdrawalPage() {
                   <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full"></div>
                </div>
                <span className="text-gray-600 text-sm font-medium leading-relaxed">
-                 Minimum withdrawal limit is <span className="text-gray-900 font-bold">₹190</span>
+                 Minimum withdrawal limit is <span className="text-gray-900 font-bold">₹1000</span>
                </span>
             </li>
             <li className="flex items-start gap-3">
@@ -371,7 +370,7 @@ export default function WithdrawalPage() {
                   <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full"></div>
                </div>
                <span className="text-gray-600 text-sm font-medium leading-relaxed">
-                 Platform maintenance fee: <span className="text-gray-900 font-bold">10% Tax</span>
+                 Platform maintenance fee: <span className="text-gray-900 font-bold">0% Tax</span>
                </span>
             </li>
             <li className="flex items-start gap-3">

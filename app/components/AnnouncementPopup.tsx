@@ -71,12 +71,12 @@ export default function AnnouncementPopup() {
 
               <div className="flex flex-col items-center">
                 <span className="text-[#B8860B] font-black text-xs uppercase tracking-widest mb-1">Entry</span>
-                <p>Minimum Deposit: <span className="text-gray-900 font-bold">₹295</span></p>
+                <p>Minimum Deposit: <span className="text-gray-900 font-bold">₹550</span></p>
               </div>
 
               <div className="flex flex-col items-center">
                 <span className="text-[#B8860B] font-black text-xs uppercase tracking-widest mb-1">Liquidity</span>
-                <p>Minimum Withdrawal: <span className="text-gray-900 font-bold">₹190</span></p>
+                <p>Minimum Withdrawal: <span className="text-gray-900 font-bold">₹1000</span></p>
               </div>
 
               <div className="flex flex-col items-center">

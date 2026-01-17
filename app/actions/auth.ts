@@ -15,6 +15,11 @@ export async function login(formData: FormData) {
         return { error: 'Mobile number and password are required' }
     }
 
+    const mobileRegex = /^[6-9]\d{9}$/;
+    if (!mobileRegex.test(mobile)) {
+        return { error: 'Please enter a valid 10-digit Indian mobile number' }
+    }
+
     try {
         const user = await prisma.user.findUnique({
             where: { mobile },
@@ -67,8 +72,17 @@ export async function signup(formData: FormData) {
     const password = formData.get('password') as string
     const fullName = formData.get('fullName') as string
 
-    if (!mobile || !password) {
-        return { error: 'Mobile number and password are required' }
+    if (!mobile || !password || !fullName) {
+        return { error: 'All fields are required' }
+    }
+
+    const mobileRegex = /^[6-9]\d{9}$/;
+    if (!mobileRegex.test(mobile)) {
+        return { error: 'Please enter a valid 10-digit Indian mobile number' }
+    }
+
+    if (fullName.trim().length < 3) {
+        return { error: 'Full name must be at least 3 characters long' }
     }
 
     try {

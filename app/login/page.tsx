@@ -16,6 +16,14 @@ export default function LoginPage() {
         setError(null)
 
         const formData = new FormData(e.currentTarget)
+        const mobile = formData.get('mobile') as string
+        const mobileRegex = /^[6-9]\d{9}$/
+        if (!mobileRegex.test(mobile)) {
+            setError('Please enter a valid 10-digit Indian mobile number')
+            setLoading(false)
+            return
+        }
+
         const result = await login(formData)
 
         if (result?.error) {
@@ -73,8 +81,11 @@ export default function LoginPage() {
                                         name="mobile"
                                         type="tel"
                                         required
+                                        pattern="[6-9][0-9]{9}"
+                                        maxLength={10}
+                                        inputMode="numeric"
                                         className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#B8860B]/20 focus:border-[#B8860B] outline-none transition-all placeholder-gray-400"
-                                        placeholder="Enter mobile number"
+                                        placeholder="Enter 10-digit mobile number"
                                     />
                                 </div>
                             </div>

@@ -7,8 +7,9 @@ import BottomNavigation from './BottomNavigation';
 export default function ConditionalFooter() {
   const pathname = usePathname();
   const isAuthPage = pathname === '/login' || pathname === '/signup';
+  const isAdminPage = pathname?.startsWith('/admin');
 
-  if (isAuthPage) {
+  if (isAuthPage || isAdminPage) {
     return null;
   }
 

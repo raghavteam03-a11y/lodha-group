@@ -48,28 +48,50 @@ export const buildings = [
 export const properties: Property[] = [
   {
     id: '1',
-    name: 'Lodha Park - Studio Elite',
-    building: 'Lodha Park',
+    name: 'Lodha Crown - 3500 Sqft Estate',
+    building: 'Lodha Crown',
     type: 'apartment',
-    price: 600,
-    dailyIncome: 300,
+    price: 550,
+    dailyIncome: 350,
     cycleDays: 45,
-    totalReturn: 13500,
-    area: 650,
-    bedrooms: 1,
-    bathrooms: 1,
-    location: 'Worli, Mumbai',
-    description: 'A perfect entry point for smart investors. This 650 sq.ft. studio in Lodha Park offers a high-yield opportunity with steady daily returns.',
+    totalReturn: 15750,
+    area: 3500,
+    bedrooms: 2,
+    bathrooms: 2,
+    location: 'Majiwada, Thane',
+    description: 'A spacious 3500 sqft designer home at an entry-level investment price. Highly stable returns over 45 days.',
     images: [
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop'
     ],
-    amenities: ['Gym', 'Parking', 'Security', 'Clubhouse'],
+    amenities: ['Gym', 'Security', 'Clubhouse'],
     available: true,
     vipLevel: 1
   },
   {
     id: '2',
+    name: 'Lodha Vista - 1850 Sqft Loft',
+    building: 'Lodha Vista',
+    type: 'apartment',
+    price: 800,
+    dailyIncome: 2000,
+    cycleDays: 5,
+    totalReturn: 10000,
+    area: 1850,
+    bedrooms: 2,
+    bathrooms: 2,
+    location: 'Lower Parel, Mumbai',
+    description: 'A high-yield short-cycle investment in the heart of Mumbai. Massive daily returns in just 5 days.',
+    images: [
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&h=600&fit=crop'
+    ],
+    amenities: ['Rooftop Pool', 'Luxury Lobby', 'Concierge'],
+    available: true,
+    vipLevel: 2
+  },
+  {
+    id: '3',
     name: 'Upper Thane - Designer Suite',
     building: 'Lodha Upper Thane',
     type: 'apartment',
@@ -81,17 +103,17 @@ export const properties: Property[] = [
     bedrooms: 2,
     bathrooms: 2,
     location: 'Thane, Mumbai',
-    description: 'Strategically located 2BHK designer suite in Upper Thane. Optimized for short-cycle, high-frequency returns for the modern investor.',
+    description: 'Strategically located 2BHK designer suite in Upper Thane. Optimized for short-cycle returns.',
     images: [
       'https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop'
     ],
-    amenities: ['Swimming Pool', 'Garden', 'Security', 'Clubhouse'],
+    amenities: ['Swimming Pool', 'Garden', 'Security'],
     available: true,
-    vipLevel: 2
+    vipLevel: 3
   },
   {
-    id: '3',
+    id: '4',
     name: 'Lodha Evoq - Premium Living',
     building: 'Lodha Evoq',
     type: 'apartment',
@@ -103,17 +125,17 @@ export const properties: Property[] = [
     bedrooms: 2,
     bathrooms: 2,
     location: 'New Cuffe Parade, Mumbai',
-    description: 'Luxury 1200 sq.ft. residence in New Cuffe Parade. A compact investment plan with lightning-fast returns in just 10 days.',
+    description: 'Luxury residence in New Cuffe Parade. A compact investment plan with fast returns.',
     images: [
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1536376074432-8d2a3d76359c?w=800&h=600&fit=crop'
     ],
-    amenities: ['Swimming Pool', 'Gym', 'Parking', 'Rooftop Garden'],
+    amenities: ['Swimming Pool', 'Gym', 'Parking'],
     available: true,
-    vipLevel: 3
+    vipLevel: 4
   },
   {
-    id: '4',
+    id: '5',
     name: 'Penthouse Skyline View',
     building: 'Lodha Amara',
     type: 'penthouse',
@@ -125,17 +147,17 @@ export const properties: Property[] = [
     bedrooms: 5,
     bathrooms: 4,
     location: 'Kolshet, Thane',
-    description: 'Expansive 5000 sq.ft. penthouse with panoramic skyline views. High-tier investment for serious wealth compounding.',
+    description: 'Expansive penthouse with panoramic skyline views. High-tier investment for serious wealth.',
     images: [
       'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop'
     ],
-    amenities: ['Private Elevator', 'Wine Cellar', 'Gym', 'Concierge'],
+    amenities: ['Private Elevator', 'Wine Cellar', 'Gym'],
     available: true,
-    vipLevel: 4
+    vipLevel: 5
   },
   {
-    id: '5',
+    id: '6',
     name: 'Worli Sea Face Premium',
     building: 'Lodha Park',
     type: 'apartment',
@@ -147,35 +169,57 @@ export const properties: Property[] = [
     bedrooms: 3,
     bathrooms: 3,
     location: 'Worli, Mumbai',
-    description: 'Prime 1950 sq.ft. 3BHK with breathtaking sea views. A mid-high range plan offering substantial daily cash flow.',
+    description: 'Prime 3BHK with breathtaking sea views. Mid-high range plan with substantial daily cash flow.',
     images: [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1512915922686-57c11f9ad6b3?w=800&h=600&fit=crop'
     ],
-    amenities: ['Private Pool', 'Smart Home', 'Security', 'Clubhouse'],
+    amenities: ['Private Pool', 'Smart Home', 'Security'],
     available: true,
-    vipLevel: 5
+    vipLevel: 6
   },
   {
-    id: '6',
+    id: '7',
     name: 'Belmond Villa Estate',
-    building: 'Lodha Amara',
+    building: 'Lodha Belmondo',
     type: 'villa',
     price: 6000,
-    dailyIncome: 4000,
-    cycleDays: 15,
-    totalReturn: 60000,
+    dailyIncome: 4500,
+    cycleDays: 20,
+    totalReturn: 90000,
     area: 4500,
     bedrooms: 5,
     bathrooms: 5,
-    location: 'Banjara Hills, Hyderabad',
-    description: 'The ultimate investment asset. A massive 4500 sq.ft. villa estate for elite investors seeking unparalleled daily returns.',
+    location: 'Pune-Mumbai Expressway',
+    description: 'The ultimate investment asset. A massive villa estate for elite investors seeking peak returns.',
     images: [
-      'https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop'
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1200&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&h=800&fit=crop'
     ],
-    amenities: ['Private Pool', 'Landscaped Garden', 'Home Theater', 'Home Automation'],
+    amenities: ['Golf Course', 'Private Pool', 'Helipad Access'],
     available: true,
-    vipLevel: 6
+    vipLevel: 7
+  },
+  {
+    id: '8',
+    name: 'The World Towers Executive',
+    building: 'World One',
+    type: 'penthouse',
+    price: 15000,
+    dailyIncome: 12000,
+    cycleDays: 30,
+    totalReturn: 360000,
+    area: 8000,
+    bedrooms: 6,
+    bathrooms: 7,
+    location: 'Upper Worli, Mumbai',
+    description: 'The pinnacle of global living. Own a part of the world\'s tallest residential tower with unmatched returns.',
+    images: [
+      'https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=1200&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=800&fit=crop'
+    ],
+    amenities: ['Sky Garden', 'Spa', 'Butler Service', 'Private Cinema'],
+    available: true,
+    vipLevel: 8
   }
 ];
