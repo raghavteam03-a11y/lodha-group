@@ -63,8 +63,6 @@ export default function ProfilePage() {
   const router = useRouter();
 
   const [bankDetails, setBankDetails] = useState<any>(null);
-  const [recharge] = useState(0);
-  const [totalIncome] = useState(0);
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
@@ -170,13 +168,13 @@ export default function ProfilePage() {
             <div className="flex-1 text-center px-2">
               <div className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Recharge</div>
               <div className="text-xl md:text-2xl font-bold text-[#1A1A1A]">
-                {formatPrice(recharge)}
+                {formatPrice(user?.recharge || 0)}
               </div>
             </div>
             <div className="flex-1 text-center px-2">
               <div className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Income</div>
               <div className="text-xl md:text-2xl font-bold text-[#D4AF37]">
-                {formatPrice(totalIncome)}
+                {formatPrice(user?.income || 0)}
               </div>
             </div>
           </div>
