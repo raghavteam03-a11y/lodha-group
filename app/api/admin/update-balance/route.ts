@@ -45,18 +45,17 @@ export async function POST(request: Request) {
                 const numericRecharge = parseFloat(recharge)
                 if (!isNaN(numericRecharge)) {
                     const prevValue = user.recharge || 0
-                    const newValue = numericRecharge 
-                    const diff = newValue - prevValue
+                    const newValue = prevValue + numericRecharge
                     updateData.recharge = newValue
 
                     await tx.fundHistory.create({
                         data: {
                             userId,
                             type: 'RECHARGE',
-                            amount: diff,
+                            amount: numericRecharge,
                             prevValue,
                             newValue,
-                            remark: remark || `Recharge updated from ${prevValue} to ${newValue}`
+                            remark: remark || `Added ${numericRecharge} to recharge`
                         }
                     })
                 }
@@ -66,22 +65,22 @@ export async function POST(request: Request) {
                 const numericIncome = parseFloat(income)
                 if (!isNaN(numericIncome)) {
                     const prevValue = user.income || 0
-                    const newValue = numericIncome
-                    const diff = newValue - prevValue
+                    const newValue = prevValue + numericIncome
                     updateData.income = newValue
 
                     await tx.fundHistory.create({
                         data: {
                             userId,
                             type: 'INCOME',
-                            amount: diff,
+                            amount: numericIncome,
                             prevValue,
                             newValue,
-                            remark: remark || `Income updated from ${prevValue} to ${newValue}`
+                            remark: remark || `Added ${numericIncome} to income`
                         }
                     })
                 }
             }
+
 
             const updatedUser = await tx.user.update({
                 where: { id: userId },
