@@ -3,15 +3,10 @@ import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
     try {
-        const { userId, amount, remark } = await request.json()
+        const { userId, amount, recharge, income, remark } = await request.json()
 
-        if (!userId || amount === undefined) {
-            return NextResponse.json({ error: 'User ID and amount are required' }, { status: 400 })
-        }
-
-        const numericAmount = parseFloat(amount)
-        if (isNaN(numericAmount)) {
-            return NextResponse.json({ error: 'Invalid amount' }, { status: 400 })
+        if (!userId) {
+            return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
         }
 
         // Use a transaction to update balance and create history record
@@ -24,27 +19,47 @@ export async function POST(request: Request) {
                 throw new Error('User not found')
             }
 
-            const prevBalance = user.balance
-            const newBalance = prevBalance + numericAmount
+            const updateData: any = {}
+
+            if (amount !== undefined) {
+                const numericAmount = parseFloat(amount)
+                if (!isNaN(numericAmount)) {
+                    const prevBalance = user.balance
+                    const newBalance = prevBalance + numericAmount
+                    updateData.balance = newBalance
+
+                    await tx.balanceHistory.create({
+                        data: {
+                            userId,
+                            amount: numericAmount,
+                            prevBalance,
+                            newBalance,
+                            remark: remark || `Added ${numericAmount} to balance`
+                        }
+                    })
+                }
+            }
+
+            if (recharge !== undefined) {
+                const numericRecharge = parseFloat(recharge)
+                if (!isNaN(numericRecharge)) {
+                    updateData.recharge = numericRecharge
+                }
+            }
+
+            if (income !== undefined) {
+                const numericIncome = parseFloat(income)
+                if (!isNaN(numericIncome)) {
+                    updateData.income = numericIncome
+                }
+            }
 
             const updatedUser = await tx.user.update({
                 where: { id: userId },
-                data: {
-                    balance: newBalance
-                }
+                data: updateData
             })
 
-            const history = await tx.balanceHistory.create({
-                data: {
-                    userId,
-                    amount: numericAmount,
-                    prevBalance,
-                    newBalance,
-                    remark: remark || `Added ${numericAmount} to balance`
-                }
-            })
-
-            return { updatedUser, history }
+            return { updatedUser }
         })
 
         return NextResponse.json(result)

@@ -18,6 +18,8 @@ interface User {
     fullName: string | null
     role: string
     balance: number
+    recharge: number
+    income: number
     balanceHistory: BalanceHistory[]
 }
 
@@ -26,6 +28,8 @@ export default function AdminBalancePage() {
     const [loading, setLoading] = useState(true)
     const [updatingId, setUpdatingId] = useState<string | null>(null)
     const [amounts, setAmounts] = useState<{ [key: string]: string }>({})
+    const [recharges, setRecharges] = useState<{ [key: string]: string }>({})
+    const [incomes, setIncomes] = useState<{ [key: string]: string }>({})
     const [remarks, setRemarks] = useState<{ [key: string]: string }>({})
     const [error, setError] = useState('')
     const [expandedUser, setExpandedUser] = useState<string | null>(null)
@@ -52,8 +56,11 @@ export default function AdminBalancePage() {
 
     const handleUpdateBalance = async (userId: string) => {
         const amount = amounts[userId]
-        if (!amount || isNaN(parseFloat(amount))) {
-            alert('Please enter a valid amount')
+        const recharge = recharges[userId]
+        const income = incomes[userId]
+
+        if (!amount && !recharge && !income) {
+            alert('Please enter at least one value to update')
             return
         }
 
@@ -64,7 +71,9 @@ export default function AdminBalancePage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     userId,
-                    amount: parseFloat(amount),
+                    amount: amount ? parseFloat(amount) : undefined,
+                    recharge: recharge ? parseFloat(recharge) : undefined,
+                    income: income ? parseFloat(income) : undefined,
                     remark: remarks[userId] || ''
                 })
             })
@@ -74,6 +83,8 @@ export default function AdminBalancePage() {
                 await fetchUsers()
                 // Clear inputs
                 setAmounts(prev => ({ ...prev, [userId]: '' }))
+                setRecharges(prev => ({ ...prev, [userId]: '' }))
+                setIncomes(prev => ({ ...prev, [userId]: '' }))
                 setRemarks(prev => ({ ...prev, [userId]: '' }))
             } else {
                 const data = await res.json()
@@ -141,8 +152,8 @@ export default function AdminBalancePage() {
                         <thead>
                             <tr className="bg-white/5 text-gray-400 text-sm uppercase tracking-wider">
                                 <th className="px-6 py-4 text-left">User Details</th>
-                                <th className="px-6 py-4 text-left">Current Balance</th>
-                                <th className="px-6 py-4 text-left">Add Balance</th>
+                                <th className="px-6 py-4 text-left">Current Stats</th>
+                                <th className="px-6 py-4 text-left">Update Funds</th>
                                 <th className="px-6 py-4 text-right">Action</th>
                             </tr>
                         </thead>
@@ -157,28 +168,57 @@ export default function AdminBalancePage() {
                                             </div>
                                         </td>
                                         <td className="px-6 py-6">
-                                            <div className="text-2xl font-bold text-green-400">
-                                                ₹{user.balance.toLocaleString()}
+                                            <div className="space-y-1">
+                                                <div className="flex justify-between items-center gap-4">
+                                                    <span className="text-xs text-gray-500 uppercase">Balance</span>
+                                                    <span className="font-bold text-green-400">₹{user.balance.toLocaleString()}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center gap-4 border-t border-white/5 pt-1">
+                                                    <span className="text-xs text-gray-500 uppercase">Recharge</span>
+                                                    <span className="font-bold text-blue-400">₹{(user.recharge || 0).toLocaleString()}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center gap-4 border-t border-white/5 pt-1">
+                                                    <span className="text-xs text-gray-500 uppercase">Income</span>
+                                                    <span className="font-bold text-purple-400">₹{(user.income || 0).toLocaleString()}</span>
+                                                </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-6">
-                                            <div className="flex gap-4">
-                                                <div className="flex-1">
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <div>
                                                     <input
                                                         type="number"
-                                                        placeholder="Amount"
+                                                        placeholder="Add Balance"
                                                         value={amounts[user.id] || ''}
                                                         onChange={(e) => setAmounts(prev => ({ ...prev, [user.id]: e.target.value }))}
-                                                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
+                                                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all placeholder:text-gray-600"
                                                     />
                                                 </div>
-                                                <div className="flex-1">
+                                                <div>
                                                     <input
                                                         type="text"
-                                                        placeholder="Remark (optional)"
+                                                        placeholder="Remark"
                                                         value={remarks[user.id] || ''}
                                                         onChange={(e) => setRemarks(prev => ({ ...prev, [user.id]: e.target.value }))}
-                                                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
+                                                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all placeholder:text-gray-600"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        type="number"
+                                                        placeholder="Set Recharge"
+                                                        value={recharges[user.id] || ''}
+                                                        onChange={(e) => setRecharges(prev => ({ ...prev, [user.id]: e.target.value }))}
+                                                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-gray-600 border-blue-500/20"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        type="number"
+                                                        placeholder="Set Income"
+                                                        value={incomes[user.id] || ''}
+                                                        onChange={(e) => setIncomes(prev => ({ ...prev, [user.id]: e.target.value }))}
+                                                        className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all placeholder:text-gray-600 border-purple-500/20"
                                                     />
                                                 </div>
                                             </div>
