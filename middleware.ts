@@ -16,11 +16,27 @@ export async function middleware(request: NextRequest) {
     const isAdminLoginRoute = pathname === '/admin/login'
 
     // 1. Handle Admin Routes
-    if (isAdminRoute && !isAdminLoginRoute) {
+    if (isAdminRoute) {
         if (!token) {
-            return NextResponse.redirect(new URL('/admin/login', request.url))
+            if (!isAdminLoginRoute) {
+                return NextResponse.redirect(new URL('/admin/login', request.url))
+            }
+            return NextResponse.next()
         }
 
+        // Token exists, redirect away from login if admin
+        if (isAdminLoginRoute) {
+            try {
+                const { payload } = await jose.jwtVerify(token, SECRET_KEY)
+                if (payload.role === 'admin') {
+                    return NextResponse.redirect(new URL('/admin/balance', request.url))
+                }
+            } catch (err) {
+                return NextResponse.next()
+            }
+        }
+
+        // Verify admin permissions for protected routes
         try {
             const { payload } = await jose.jwtVerify(token, SECRET_KEY)
             if (payload.role !== 'admin') {
@@ -31,21 +47,17 @@ export async function middleware(request: NextRequest) {
         }
     }
 
-    // 2. Handle Regular User Routes
-    if (!token) {
-        // Not logged in and trying to access protected user routes
-        if (!isPublicRoute && !isAdminRoute && pathname !== '/') {
-            // For now, let's keep the user's existing logic for home route
-            // isHomeRoute in their previous code was just '/'
+    // 2. Handle User Routes (Non-admin)
+    if (!isAdminRoute) {
+        if (!token) {
+            if (!isPublicRoute) {
+                return NextResponse.redirect(new URL('/login', request.url))
+            }
+            return NextResponse.next()
         }
 
-        if (pathname === '/') {
-            return NextResponse.redirect(new URL('/login', request.url))
-        }
-    } else {
-        // Logged in
-        if (isPublicRoute || isAdminLoginRoute) {
-            // Redirect to appropriate dashboard
+        // Token exists, redirect away from public pages
+        if (isPublicRoute) {
             try {
                 const { payload } = await jose.jwtVerify(token, SECRET_KEY)
                 if (payload.role === 'admin') {
@@ -53,7 +65,6 @@ export async function middleware(request: NextRequest) {
                 }
                 return NextResponse.redirect(new URL('/', request.url))
             } catch (err) {
-                // If token invalid, proceed to login
                 return NextResponse.next()
             }
         }
