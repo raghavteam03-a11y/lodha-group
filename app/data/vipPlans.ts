@@ -8,6 +8,7 @@ export interface VIPPlan {
   limit: number;
   image: string;
   description: string;
+  externalLink?: string;
 }
 
 export const vipPlans: VIPPlan[] = [
@@ -20,7 +21,8 @@ export const vipPlans: VIPPlan[] = [
     days: 5,
     limit: 5,
     image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
-    description: 'High-stability long-term growth plan. Perfect for building a solid foundation.'
+    description: 'High-stability long-term growth plan. Perfect for building a solid foundation.',
+    externalLink: 'https://onetapay.com/pp/MTYwNg=='
   },
   {
     id: '2',
@@ -31,7 +33,8 @@ export const vipPlans: VIPPlan[] = [
     days: 8,
     limit: 5,
     image: 'https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=800&h=600&fit=crop',
-    description: 'Balanced investment with optimized cycle for frequent payouts.'
+    description: 'Balanced investment with optimized cycle for frequent payouts.',
+    externalLink: 'https://onetapay.com/pp/MTYwNw=='
   },
   {
     id: '3',
@@ -42,7 +45,8 @@ export const vipPlans: VIPPlan[] = [
     days: 6,
     limit: 3,
     image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
-    description: 'Elite speed plan. Maximize your returns in just 10 days.'
+    description: 'Elite speed plan. Maximize your returns in just 10 days.',
+    externalLink: 'https://onetapay.com/pp/MTYwOA=='
   },
   {
     id: '4',
@@ -53,7 +57,8 @@ export const vipPlans: VIPPlan[] = [
     days: 2,
     limit: 2,
     image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop',
-    description: 'Tier-A asset investment with high-yield daily dividends.'
+    description: 'Tier-A asset investment with high-yield daily dividends.',
+    externalLink: 'https://onetapay.com/pp/MTYwOQ=='
   },
   {
     id: '5',
@@ -64,7 +69,8 @@ export const vipPlans: VIPPlan[] = [
     days: 2,
     limit: 2,
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
-    description: 'Premium luxury plan offering unprecedented daily income levels.'
+    description: 'Premium luxury plan offering unprecedented daily income levels.',
+    externalLink: 'https://onetapay.com/pp/MTYxMA=='
   },
   {
     id: '6',
@@ -75,6 +81,7 @@ export const vipPlans: VIPPlan[] = [
     days: 6,
     limit: 1,
     image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
-    description: 'The pinnacle of Lodha Group investment. For the most ambitious portfolios.'
+    description: 'The pinnacle of Lodha Group investment. For the most ambitious portfolios.',
+    externalLink: 'https://onetapay.com/pp/MTYxMQ=='
   }
 ];

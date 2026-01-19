@@ -128,7 +128,9 @@ export default function VIPPlansPage() {
 
                   {/* Invest Button */}
                   <Link 
-                    href={`/property/vip-${plan.id}`}
+                    href={plan.externalLink || `/property/vip-${plan.id}`}
+                    target={plan.externalLink ? "_blank" : undefined}
+                    rel={plan.externalLink ? "noopener noreferrer" : undefined}
                     className="w-full bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#8B6914] text-white py-4 px-6 rounded-2xl font-black text-lg shadow-[0_10px_30px_rgba(184,134,11,0.2)] hover:shadow-[0_15px_40px_rgba(184,134,11,0.3)] transition-all flex items-center justify-between group/btn active:scale-[0.98]"
                   >
                     <span className="flex items-center gap-2">

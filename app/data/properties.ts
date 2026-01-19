@@ -64,7 +64,8 @@ export const properties: Property[] = [
     images: ['/images/vip-starter.png'],
     amenities: ['Basic Security', 'Water Supply', 'Parking'],
     available: true,
-    vipLevel: 1
+    vipLevel: 1,
+    externalLink: 'https://onetapay.com/pp/MTU5OA=='
   },
   {
     id: '2',
@@ -109,7 +110,8 @@ export const properties: Property[] = [
     ],
     amenities: ['Rooftop Pool', 'Luxury Lobby', 'Concierge'],
     available: true,
-    vipLevel: 2
+    vipLevel: 2,
+    externalLink: 'https://onetapay.com/pp/MTU5OQ=='
   },
   {
     id: '4',
@@ -131,7 +133,8 @@ export const properties: Property[] = [
     ],
     amenities: ['Swimming Pool', 'Garden', 'Security'],
     available: true,
-    vipLevel: 3
+    vipLevel: 3,
+    externalLink: 'https://onetapay.com/pp/MTYwMA=='
   },
   {
     id: '5',
@@ -153,7 +156,8 @@ export const properties: Property[] = [
     ],
     amenities: ['Swimming Pool', 'Gym', 'Parking'],
     available: true,
-    vipLevel: 4
+    vipLevel: 4,
+    externalLink: 'https://onetapay.com/pp/MTYwMQ=='
   },
   {
     id: '6',
@@ -175,7 +179,8 @@ export const properties: Property[] = [
     ],
     amenities: ['Private Elevator', 'Wine Cellar', 'Gym'],
     available: true,
-    vipLevel: 5
+    vipLevel: 5,
+    externalLink: 'https://onetapay.com/pp/MTYwMg=='
   },
   {
     id: '7',
@@ -197,7 +202,8 @@ export const properties: Property[] = [
     ],
     amenities: ['Private Pool', 'Smart Home', 'Security'],
     available: true,
-    vipLevel: 6
+    vipLevel: 6,
+    externalLink: 'https://onetapay.com/pp/MTYwMw=='
   },
   {
     id: '8',
@@ -219,7 +225,9 @@ export const properties: Property[] = [
     ],
     amenities: ['Golf Course', 'Private Pool', 'Helipad Access'],
     available: true,
-    vipLevel: 7
+    vipLevel: 7,
+    externalLink: 'https://onetapay.com/pp/MTYwNA=='
+
   },
   {
     id: '9',
@@ -241,7 +249,8 @@ export const properties: Property[] = [
     ],
     amenities: ['Sky Garden', 'Spa', 'Butler Service', 'Private Cinema'],
     available: true,
-    vipLevel: 8
+    vipLevel: 8,
+    externalLink: 'https://onetapay.com/pp/MTYwNQ=='
   },
   {
     id: 'vip-1',
@@ -260,7 +269,8 @@ export const properties: Property[] = [
     images: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop'],
     amenities: ['Gym', 'Security', 'Clubhouse'],
     available: true,
-    vipLevel: 1
+    vipLevel: 1,
+    externalLink: 'https://onetapay.com/pp/MTYwNg=='
   },
   {
     id: 'vip-2',
@@ -279,7 +289,8 @@ export const properties: Property[] = [
     images: ['https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=800&h=600&fit=crop'],
     amenities: ['Rooftop Pool', 'Luxury Lobby', 'Concierge'],
     available: true,
-    vipLevel: 2
+    vipLevel: 2,
+    externalLink: 'https://onetapay.com/pp/MTYwNw=='
   },
   {
     id: 'vip-3',
@@ -298,7 +309,8 @@ export const properties: Property[] = [
     images: ['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop'],
     amenities: ['Swimming Pool', 'Garden', 'Security'],
     available: true,
-    vipLevel: 3
+    vipLevel: 3,
+    externalLink: 'https://onetapay.com/pp/MTYwOA=='
   },
   {
     id: 'vip-4',
@@ -317,7 +329,8 @@ export const properties: Property[] = [
     images: ['https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop'],
     amenities: ['Swimming Pool', 'Gym', 'Parking'],
     available: true,
-    vipLevel: 4
+    vipLevel: 4,
+    externalLink: 'https://onetapay.com/pp/MTYwOQ=='
   },
   {
     id: 'vip-5',
@@ -336,7 +349,8 @@ export const properties: Property[] = [
     images: ['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop'],
     amenities: ['Private Elevator', 'Wine Cellar', 'Gym'],
     available: true,
-    vipLevel: 5
+    vipLevel: 5,
+    externalLink: 'https://onetapay.com/pp/MTYxMA=='
   },
   {
     id: 'vip-6',
@@ -355,6 +369,7 @@ export const properties: Property[] = [
     images: ['https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop'],
     amenities: ['Golf Course', 'Private Pool', 'Helipad Access'],
     available: true,
-    vipLevel: 6
+    vipLevel: 6,
+    externalLink: 'https://onetapay.com/pp/MTYxMQ=='
   }
 ];
