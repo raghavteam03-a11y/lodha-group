@@ -16,6 +16,7 @@ export interface Property {
   amenities: string[];
   available: boolean;
   vipLevel?: number;
+  externalLink?: string;
 }
 
 export const buildings = [
@@ -85,7 +86,8 @@ export const properties: Property[] = [
     ],
     amenities: ['Gym', 'Security', 'Clubhouse'],
     available: true,
-    vipLevel: 1
+    vipLevel: 1,
+    externalLink: 'https://onetapay.com/pp/MTU5Nw=='
   },
   {
     id: '3',

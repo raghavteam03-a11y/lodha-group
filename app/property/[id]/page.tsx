@@ -148,9 +148,14 @@ export default function PropertyDetailPage({ params }: PropertyDetailPageProps) 
                     </div>
                  </div>
 
-                 <button className="w-full bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#8B6914] text-white py-5 px-6 rounded-3xl font-black text-lg shadow-[0_10px_30px_rgba(184,134,11,0.25)] hover:shadow-[0_15px_40px_rgba(184,134,11,0.35)] transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+                 <Link 
+                    href={property.externalLink || '#'} 
+                    target={property.externalLink ? "_blank" : undefined}
+                    rel={property.externalLink ? "noopener noreferrer" : undefined}
+                    className="w-full bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#8B6914] text-white py-5 px-6 rounded-3xl font-black text-lg shadow-[0_10px_30px_rgba(184,134,11,0.25)] hover:shadow-[0_15px_40px_rgba(184,134,11,0.35)] transition-all active:scale-[0.98] flex items-center justify-center gap-3"
+                 >
                     Confirm Investment
-                 </button>
+                 </Link>
                  <p className="text-center text-[10px] text-gray-400 font-bold uppercase tracking-tighter mt-4">
                     Secured by Lodha Trust Wallet
                  </p>
