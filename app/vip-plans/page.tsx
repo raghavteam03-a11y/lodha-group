@@ -127,9 +127,19 @@ export default function VIPPlansPage() {
                   </div>
 
                   {/* Invest Button */}
-                  <button className="w-full bg-[#1A1A1A] text-white py-5 px-6 rounded-2xl font-black text-sm uppercase tracking-[0.2em] shadow-xl hover:shadow-[#D4AF37]/20 transition-all active:scale-[0.98] group/btn">
-                     <span className="group-hover:text-[#D4AF37] transition-colors">Apply for VIP {idx + 1}</span>
-                  </button>
+                  <Link 
+                    href={`/property/vip-${plan.id}`}
+                    className="w-full bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#8B6914] text-white py-4 px-6 rounded-2xl font-black text-lg shadow-[0_10px_30px_rgba(184,134,11,0.2)] hover:shadow-[0_15px_40px_rgba(184,134,11,0.3)] transition-all flex items-center justify-between group/btn active:scale-[0.98]"
+                  >
+                    <span className="flex items-center gap-2">
+                      Buy Now
+                      <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
+                    <span className="text-white/30 font-light mx-2">|</span>
+                    <span className="tracking-tight">{formatPrice(plan.price)}</span>
+                  </Link>
                   
                   <p className="mt-4 text-[10px] text-gray-400 font-bold uppercase tracking-tight opacity-0 group-hover:opacity-100 transition-opacity duration-700 leading-relaxed italic">
                     "{plan.description}"

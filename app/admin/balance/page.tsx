@@ -150,7 +150,7 @@ export default function AdminBalancePage() {
 
                 <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md">
                     <table className="w-full border-collapse">
-                        <thead>
+                        <thead className="hidden md:table-header-group">
                             <tr className="bg-white/5 text-gray-400 text-sm uppercase tracking-wider">
                                 <th className="px-6 py-4 text-left">User Details</th>
                                 <th className="px-6 py-4 text-left">Current Stats</th>
@@ -161,8 +161,8 @@ export default function AdminBalancePage() {
                         <tbody className="divide-y divide-white/5">
                             {users.map(user => (
                                 <div key={user.id} className="contents">
-                                    <tr className={`hover:bg-white/[0.02] transition-colors ${expandedUser === user.id ? 'bg-white/[0.05]' : ''}`}>
-                                        <td className="px-6 py-6" onClick={() => setExpandedUser(expandedUser === user.id ? null : user.id)}>
+                                    <tr className={`hover:bg-white/[0.02] transition-colors ${expandedUser === user.id ? 'bg-white/[0.05]' : ''} flex flex-col md:table-row border-b border-white/5 md:border-none last:border-none`}>
+                                        <td className="px-6 py-4 md:py-6 block md:table-cell" onClick={() => setExpandedUser(expandedUser === user.id ? null : user.id)}>
                                             <div className="font-medium text-lg">{user.fullName || 'Unnamed User'}</div>
                                             <div className="text-gray-500 text-sm font-mono cursor-pointer hover:text-indigo-400 transition-colors">
                                                 {user.mobile} • {user.role}
@@ -171,7 +171,7 @@ export default function AdminBalancePage() {
                                                 {expandedUser === user.id ? 'Hide History' : 'Show History'}
                                             </div>
                                         </td>
-                                        <td className="px-6 py-6">
+                                        <td className="px-6 py-4 md:py-6 block md:table-cell border-t border-white/5 md:border-none">
                                             <div className="space-y-1">
                                                 <div className="flex justify-between items-center gap-4">
                                                     <span className="text-xs text-gray-500 uppercase">Balance</span>
@@ -187,8 +187,8 @@ export default function AdminBalancePage() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-6">
-                                            <div className="grid grid-cols-2 gap-2">
+                                        <td className="px-6 py-4 md:py-6 block md:table-cell border-t border-white/5 md:border-none">
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                                 <div>
                                                     <input
                                                         type="number"
@@ -227,19 +227,19 @@ export default function AdminBalancePage() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-6 text-right">
+                                        <td className="px-6 py-4 md:py-6 block md:table-cell text-right border-t border-white/5 md:border-none">
                                             <button
                                                 onClick={() => handleUpdateBalance(user.id)}
                                                 disabled={updatingId === user.id}
-                                                className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-6 py-2 rounded-lg font-medium transition-all transform active:scale-95 shadow-lg shadow-indigo-600/20"
+                                                className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-6 py-2 rounded-lg font-medium transition-all transform active:scale-95 shadow-lg shadow-indigo-600/20"
                                             >
                                                 {updatingId === user.id ? 'Saving...' : 'Save'}
                                             </button>
                                         </td>
                                     </tr>
                                     {expandedUser === user.id && (
-                                        <tr className="bg-black/40 border-t border-white/5">
-                                            <td colSpan={4} className="px-10 py-6">
+                                        <tr className="bg-black/40 border-t border-white/5 flex flex-col md:table-row">
+                                            <td colSpan={4} className="px-6 md:px-10 py-6 block md:table-cell">
                                                 <h3 className="text-sm font-semibold text-indigo-400 uppercase tracking-widest mb-4">Collective Fund History</h3>
                                                 {user.fundHistory.length > 0 ? (
                                                     <div className="space-y-3">

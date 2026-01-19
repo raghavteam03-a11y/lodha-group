@@ -13,6 +13,17 @@ export interface VIPPlan {
 export const vipPlans: VIPPlan[] = [
   {
     id: '1',
+    name: 'VIP Starter - Urban Loft',
+    price: 200,
+    daily: 110,
+    total: 3300,
+    days: 30,
+    limit: 10,
+    image: '/images/vip-starter.png',
+    description: 'Entry-level wealth building. Your gateway to exclusive property investments.'
+  },
+  {
+    id: '2',
     name: 'VIP Bronze - Park Studio',
     price: 600,
     daily: 300,
@@ -23,7 +34,7 @@ export const vipPlans: VIPPlan[] = [
     description: 'High-stability long-term growth plan. Perfect for building a solid foundation.'
   },
   {
-    id: '2',
+    id: '3',
     name: 'VIP Silver - Designer Suite',
     price: 850,
     daily: 500,
@@ -34,7 +45,7 @@ export const vipPlans: VIPPlan[] = [
     description: 'Balanced investment with optimized cycle for frequent payouts.'
   },
   {
-    id: '3',
+    id: '4',
     name: 'VIP Gold - Skyline View',
     price: 1000,
     daily: 600,
@@ -45,7 +56,7 @@ export const vipPlans: VIPPlan[] = [
     description: 'Elite speed plan. Maximize your returns in just 10 days.'
   },
   {
-    id: '4',
+    id: '5',
     name: 'VIP Platinum - Terrace Penthouse',
     price: 1800,
     daily: 1000,
@@ -56,7 +67,7 @@ export const vipPlans: VIPPlan[] = [
     description: 'Tier-A asset investment with high-yield daily dividends.'
   },
   {
-    id: '5',
+    id: '6',
     name: 'VIP Sapphire - Sea Face Estate',
     price: 3400,
     daily: 2600,
@@ -67,7 +78,7 @@ export const vipPlans: VIPPlan[] = [
     description: 'Premium luxury plan offering unprecedented daily income levels.'
   },
   {
-    id: '6',
+    id: '7',
     name: 'VIP Emerald - Belmond Villa',
     price: 6000,
     daily: 4000,
