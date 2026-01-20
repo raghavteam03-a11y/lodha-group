@@ -18,6 +18,7 @@ model User {
   recharge       Float            @default(0)
   income         Float            @default(0)
   fundHistory    FundHistory[]
+  withdrawals    Withdrawal[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 }
@@ -32,4 +33,15 @@ model FundHistory {
   newValue  Float
   remark    String?
   createdAt DateTime @default(now())
+}
+
+model Withdrawal {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  amount        Float
+  status        String   @default("PENDING") // PENDING, APPROVED, DECLINED
+  bankDetails   Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

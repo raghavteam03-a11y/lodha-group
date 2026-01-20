@@ -6,9 +6,9 @@ export async function getCurrentUser() {
     try {
         const cookieStore = await cookies()
         const token = cookieStore.get('token')?.value
-        const userId = cookieStore.get('userId')?.value
+        // const userId = cookieStore.get('userId')?.value
 
-        if (!token || !userId) return null
+        if (!token) return null
 
         const { valid, decoded } = verifyToken(token)
 
@@ -16,13 +16,20 @@ export async function getCurrentUser() {
             return null
         }
 
-        const decodedUserId = (decoded as any).userId
+        const userId = (decoded as any).userId
 
-        if (decodedUserId !== userId) return null
-
+        // if (decodedUserId !== userId) return null
         const user = await prisma.user.findUnique({
             where: { id: userId },
-            select: { id: true, mobile: true, fullName: true, role: true, balance: true, recharge: true, income: true },
+            select: {
+                id: true,
+                mobile: true,
+                fullName: true,
+                role: true,
+                balance: true,
+                recharge: true,
+                income: true,
+            },
         })
 
         return user

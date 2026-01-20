@@ -63,8 +63,8 @@ export default function WithdrawalPage() {
     const istTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
     const hours = istTime.getHours();
     
-    // 07:00 AM to 05:00 PM (17:00)
-    return hours >= 7 && hours < 17;
+    // 07:00 AM to 08:00 PM (20:00)
+    return hours >= 7 && hours < 20;
   };
 
   const handleWithdraw = async () => {
@@ -73,7 +73,7 @@ export default function WithdrawalPage() {
     if (!isWithdrawalTimeValid()) {
       setPopup({
         show: true,
-        message: 'Withdrawals are only allowed between 07:00 AM and 05:00 PM IST.',
+        message: 'Withdrawals are only allowed between 07:00 AM and 08:00 PM IST.',
         type: 'error'
       });
       return;
@@ -106,18 +106,45 @@ export default function WithdrawalPage() {
       return;
     }
 
-    // Simulate withdrawal request
+    // Submit withdrawal request to API
     try {
-      setPopup({
-        show: true,
-        message: 'The withdraw amount will be sent in 1-2 hours to your bank account.',
-        type: 'success'
-      });
+      console.log('Submitting withdrawal request:', { amount: withdrawAmt, bankDetails });
       
-      // Reset amount
-      setAmount('');
+      const res = await fetch('/api/withdrawal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: withdrawAmt,
+          bankDetails: bankDetails
+        }),
+      });
+
+      const data = await res.json();
+      console.log('Withdrawal API response:', { status: res.status, data });
+
+      if (res.ok) {
+        console.log('Withdrawal request successful, created withdrawal:', data.withdrawal);
+        setPopup({
+          show: true,
+          message: 'Withdrawal request submitted successfully. It will be processed in 1-2 hours.',
+          type: 'success'
+        });
+        
+        // Reset amount
+        setAmount('');
+      } else {
+        console.error('Withdrawal request failed:', data.error);
+        setPopup({
+          show: true,
+          message: data.error || 'Something went wrong. Please try again later.',
+          type: 'error'
+        });
+      }
       
     } catch (error) {
+      console.error('Withdrawal request error:', error);
       setPopup({
         show: true,
         message: 'Something went wrong. Please try again later.',
@@ -362,7 +389,7 @@ export default function WithdrawalPage() {
                   <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full"></div>
                </div>
                <span className="text-gray-600 text-sm font-medium leading-relaxed">
-                 Operations window: <span className="text-gray-900 font-bold">07:00 AM - 05:00 PM IST</span>
+                 Operations window: <span className="text-gray-900 font-bold">07:00 AM - 08:00 PM IST</span>
                </span>
             </li>
             <li className="flex items-start gap-3">
