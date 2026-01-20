@@ -19,6 +19,7 @@ model User {
   income         Float            @default(0)
   fundHistory    FundHistory[]
   withdrawals    Withdrawal[]
+  orders         Order[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 }
@@ -44,4 +45,25 @@ model Withdrawal {
   bankDetails   Json?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model Order {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  planId          String
+  planName        String
+  price           Float
+  dailyIncome     Float
+  totalReturn     Float
+  cycleDays       Int
+  status          String   @default("PENDING") // PENDING, ACTIVE, COMPLETED, CANCELLED
+  purchaseDate    DateTime @default(now())
+  activatedDate   DateTime?
+  expiryDate      DateTime?
+  nextPayoutDate  DateTime?
+  totalPaidOut    Float    @default(0)
+  paymentProof    Json?    // Can store payment screenshot or transaction details
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

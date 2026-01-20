@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function WithdrawalPage() {
   const [activeTab, setActiveTab] = useState<'recharge' | 'withdrawal'>('withdrawal');
-  const [amount, setAmount] = useState('200');
+  const [amount, setAmount] = useState('');
   const [balance, setBalance] = useState(0);
   const [user, setUser] = useState<any>(null);
   const [bankDetails, setBankDetails] = useState<{
@@ -286,7 +286,7 @@ export default function WithdrawalPage() {
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                placeholder="0"
+                placeholder="2000"
                 className="w-full py-4 pl-10 pr-4 bg-gray-50 border-2 border-gray-100 rounded-2xl text-2xl font-black focus:outline-none focus:border-[#D4AF37] transition-colors"
               />
             </div>
