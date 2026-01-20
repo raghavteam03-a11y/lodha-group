@@ -111,10 +111,10 @@ export default function WithdrawalRecordsPage() {
             </p>
     
             <Link 
-              href="/vip-plans" 
+              href="/withdrawal" 
               className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all"
             >
-              View Investment Plans
+              Go to Withdrawal Page 
             </Link>
           </div>
         )}

@@ -81,7 +81,7 @@ export default function AnnouncementPopup() {
 
               <div className="flex flex-col items-center">
                 <span className="text-[#B8860B] font-black text-xs uppercase tracking-widest mb-1">Timing</span>
-                <p>Withdrawals time: <span className="text-gray-900 font-bold">07:00 - 17:00</span></p>
+                <p>Withdrawals time: <span className="text-gray-900 font-bold">07:00 - 20:00</span></p>
               </div>
 
               <div className="pt-4 mt-4 border-t border-gray-100 w-full">
