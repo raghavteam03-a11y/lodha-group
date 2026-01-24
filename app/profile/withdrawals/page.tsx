@@ -33,8 +33,8 @@ export default function WithdrawalRecordsPage() {
       default:
         return <span className="px-2 py-1 bg-orange-100 text-orange-700 text-[10px] font-bold rounded-full">PENDING</span>;
     }
-  };
-
+  };       
+  
   const getStatusMessage = (status: string) => {
     switch (status) {
       case 'APPROVED':
@@ -75,7 +75,7 @@ export default function WithdrawalRecordsPage() {
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <p className="text-2xl font-black text-gray-900">₹{w.amount.toLocaleString('en-IN')}</p>
-                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">
+                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">   
                       {new Date(w.createdAt).toLocaleString()}
                     </p>
                   </div>
