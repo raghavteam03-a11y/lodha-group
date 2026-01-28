@@ -31,9 +31,14 @@ export default function HelplinePage() {
              <h2 className="text-xl font-bold text-gray-800 mb-2">How can we help?</h2>
              <p className="text-gray-500 text-sm mb-6">Our support team is available 24/7 to assist you correctly.</p>
              
-             <button className="w-full bg-[#B8860B] text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-[#8B6508] transition-all">
+             <a 
+               href="https://chat.whatsapp.com/KKy866KmmaC5ebog28yKgp?mode=gi_t"
+               target="_blank"
+               rel="noopener noreferrer"
+               className="w-full bg-[#B8860B] text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-[#8B6508] transition-all block text-center"
+             >
                Connect on WhatsApp
-             </button>
+             </a>
              <button className="w-full mt-3 bg-white border border-[#B8860B] text-[#B8860B] py-3 rounded-xl font-bold hover:bg-[#B8860B]/5 transition-all">
                Connect on Telegram
              </button>

@@ -24,43 +24,66 @@ const imagesToOptimize = [
 ];
 
 async function optimizeImages() {
-  console.log('🖼️  Starting image optimization...\n');
-
-  for (const image of imagesToOptimize) {
-    const inputPath = path.join(__dirname, '..', image.input);
-    const outputPath = path.join(__dirname, '..', image.output);
-
-    // Check if input file exists
-    if (!fs.existsSync(inputPath)) {
-      console.log(`⚠️  Skipping ${image.input} - file not found`);
-      continue;
-    }
-
+  console.log('🖼️  Starting advanced image optimization...\n');
+  console.log(`📊 Target: Images under ${MAX_FILE_SIZE}KB\n`);
+  
+  const publicDir = path.join(__dirname, '..', 'public');
+  const images = findImages(publicDir);
+  
+  if (images.length === 0) {
+    console.log('⚠️  No images found to optimize');
+    return;
+  }
+  
+  console.log(`Found ${images.length} images to optimize\n`);
+  
+  let totalOriginalSize = 0;
+  let totalOptimizedSize = 0;
+  
+  for (const imagePath of images) {
+    const relativePath = path.relative(path.join(__dirname, '..'), imagePath);
+    
     try {
       // Get original file size
-      const originalStats = fs.statSync(inputPath);
-      const originalSize = (originalStats.size / 1024).toFixed(2);
-
-      // Optimize and convert to WebP
-      await sharp(inputPath)
-        .resize(image.width, null, {
-          withoutEnlargement: true,
-          fit: 'inside'
-        })
-        .webp({ quality: image.quality })
-        .toFile(outputPath);
-
-      // Get optimized file size
-      const optimizedStats = fs.statSync(outputPath);
-      const optimizedSize = (optimizedStats.size / 1024).toFixed(2);
-      const savings = ((1 - optimizedStats.size / originalStats.size) * 100).toFixed(1);
-
-      console.log(`✅ ${image.input}`);
-      console.log(`   Original: ${originalSize} KB`);
-      console.log(`   Optimized: ${optimizedSize} KB`);
-      console.log(`   Savings: ${savings}%\n`);
+      const originalStats = fs.statSync(imagePath);
+      const originalSizeKB = originalStats.size / 1024;
+      totalOriginalSize += originalSizeKB;
+      
+      console.log(`📸 ${relativePath} (${originalSizeKB.toFixed(2)} KB)`);
+      
+      // Determine optimal width based on image location/name
+      let targetWidth = null;
+      if (relativePath.includes('auth-bg') || relativePath.includes('background')) {
+        targetWidth = RESPONSIVE_SIZES.large;
+      } else if (relativePath.includes('vip') || relativePath.includes('property')) {
+        targetWidth = RESPONSIVE_SIZES.medium;
+      } else {
+        targetWidth = RESPONSIVE_SIZES.small;
+      }
+      
+      // Generate AVIF (best compression)
+      try {
+        const avifResult = await optimizeImage(imagePath, 'avif', targetWidth);
+        totalOptimizedSize += avifResult.sizeKB;
+        console.log(`   ✅ AVIF: ${avifResult.sizeKB.toFixed(2)} KB (quality: ${avifResult.quality})`);
+      } catch (error) {
+        console.log(`   ⚠️  AVIF failed: ${error.message}`);
+      }
+      
+      // Generate WebP (fallback)
+      try {
+        const webpResult = await optimizeImage(imagePath, 'webp', targetWidth);
+        totalOptimizedSize += webpResult.sizeKB;
+        console.log(`   ✅ WebP: ${webpResult.sizeKB.toFixed(2)} KB (quality: ${webpResult.quality})`);
+      } catch (error) {
+        console.log(`   ⚠️  WebP failed: ${error.message}`);
+      }
+      
+      const savings = ((1 - (totalOptimizedSize / 2) / originalSizeKB) * 100).toFixed(1);
+      console.log(`   💾 Savings: ${savings}%\n`);
+      
     } catch (error) {
-      console.error(`❌ Error optimizing ${image.input}:`, error.message);
+      console.error(`   ❌ Error: ${error.message}\n`);
     }
   }
 

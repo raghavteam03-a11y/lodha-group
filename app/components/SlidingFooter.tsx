@@ -108,7 +108,7 @@ export default function SlidingFooter() {
               <h4 className="font-semibold text-white/90 mb-3">Contact Information</h4>
               <p className="text-gray-400 text-sm mb-2">Lodha Group</p>
               <p className="text-gray-400 text-sm mb-2">Mumbai, Maharashtra</p>
-              <p className="text-gray-400 text-sm">+91 123 456 7890</p>
+              <p className="text-gray-400 text-sm">+91 7023420471</p>
             </div>
 
             <div className="mt-6 pt-6 border-t border-white/10">
