@@ -1,11 +1,45 @@
-import { getCurrentUser } from '@/lib/auth-utils';
+'use client';
+
+import { useState, useEffect } from 'react';
 import PropertyCard from './components/PropertyCard';
 import { properties } from './data/properties';
 import Link from 'next/link';
 import AnnouncementPopup from './components/AnnouncementPopup';
 
-export default async function Home() {
-  const user = await getCurrentUser();
+export default function Home() {
+  const [user, setUser] = useState<{ fullName?: string } | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Load cached user data immediately for instant display
+    const cachedUser = localStorage.getItem('lodha_user_cache');
+    if (cachedUser) {
+      try {
+        setUser(JSON.parse(cachedUser));
+        setLoading(false);
+      } catch (e) {
+        console.error('Error parsing cached user:', e);
+      }
+    }
+
+    // Fetch fresh user data asynchronously
+    const fetchUser = async () => {
+      try {
+        const res = await fetch('/api/me');
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data.user);
+          // Cache user data for next visit
+          localStorage.setItem('lodha_user_cache', JSON.stringify(data.user));
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#F8F9FA] pb-24">
@@ -34,11 +68,11 @@ export default async function Home() {
             
             <Link href="/profile" className="flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 shadow-sm transition-transform active:scale-95">
                <div className="w-6 h-6 rounded-full bg-white text-[#B8860B] flex items-center justify-center font-bold text-xs shadow-inner">
-                 {user?.fullName ? user.fullName[0].toUpperCase() : 'G'}
+                 {loading ? '...' : (user?.fullName ? user.fullName[0].toUpperCase() : 'G')}
                </div>
                <div className="text-right hidden md:block">
                  <p className="text-white text-[10px] font-bold leading-tight">
-                   {user?.fullName || 'Guest'}
+                   {loading ? 'Loading...' : (user?.fullName || 'Guest')}
                  </p>
                  {user && <p className="text-white/90 text-[8px]">VIP</p>}
                </div>

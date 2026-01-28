@@ -23,19 +23,39 @@ export default function RechargePage() {
   ];
 
   useEffect(() => {
-    // Fetch user and balance
+    // Load cached balance immediately for instant display
+    const cachedBalance = localStorage.getItem('lodha_balance_cache');
+    if (cachedBalance) {
+      try {
+        setBalance(parseInt(cachedBalance));
+      } catch (e) {
+        console.error('Error parsing cached balance:', e);
+      }
+    }
+
+    // Fetch user and balance with AbortController for cleanup
+    const controller = new AbortController();
+    
     const fetchUser = async () => {
       try {
-        const res = await fetch('/api/me');
+        const res = await fetch('/api/me', { signal: controller.signal });
         if (res.ok) {
           const data = await res.json();
-          setBalance(data.user.balance || 0);
+          const newBalance = data.user.balance || 0;
+          setBalance(newBalance);
+          // Cache balance for next visit
+          localStorage.setItem('lodha_balance_cache', newBalance.toString());
         }
       } catch (error) {
-        console.error('Error fetching user:', error);
+        if (error instanceof Error && error.name !== 'AbortError') {
+          console.error('Error fetching user:', error);
+        }
       }
     };
+    
     fetchUser();
+    
+    return () => controller.abort();
   }, []);
 
   const formatPrice = (price: number) => {

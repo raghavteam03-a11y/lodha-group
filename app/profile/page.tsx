@@ -66,24 +66,48 @@ export default function ProfilePage() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    // Fetch user
+    // Load cached user data immediately for instant display
+    const cachedUser = localStorage.getItem('lodha_user_cache');
+    if (cachedUser) {
+      try {
+        setUser(JSON.parse(cachedUser));
+      } catch (e) {
+        console.error('Error parsing cached user:', e);
+      }
+    }
+
+    // Load cached bank details immediately
+    const savedBankDetails = localStorage.getItem('bankDetails');
+    if (savedBankDetails) {
+      try {
+        setBankDetails(JSON.parse(savedBankDetails));
+      } catch (e) {
+        console.error('Error parsing bank details:', e);
+      }
+    }
+
+    // Fetch fresh user data in background with AbortController
+    const controller = new AbortController();
+    
     const fetchUser = async () => {
       try {
-        const res = await fetch('/api/me');
+        const res = await fetch('/api/me', { signal: controller.signal });
         if (res.ok) {
           const data = await res.json();
           setUser(data.user);
+          // Update cache with fresh data
+          localStorage.setItem('lodha_user_cache', JSON.stringify(data.user));
         }
       } catch (error) {
-        console.error('Error fetching user:', error);
+        if (error instanceof Error && error.name !== 'AbortError') {
+          console.error('Error fetching user:', error);
+        }
       }
     };
+    
     fetchUser();
-
-    const savedBankDetails = localStorage.getItem('bankDetails');
-    if (savedBankDetails) {
-      setBankDetails(JSON.parse(savedBankDetails));
-    }
+    
+    return () => controller.abort();
   }, []);
 
   const formatPrice = (price: number) => {
@@ -103,7 +127,7 @@ export default function ProfilePage() {
       });
 
       if (res.ok) {
-        // Clear client storage
+        // Clear client storage including all caches
         localStorage.clear();
         sessionStorage.clear();
 

@@ -11,7 +11,7 @@ export default function AnnouncementPopup() {
     if (!hasBeenShown) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 1000); // Show after 1 second
+      }, 500); // Show after 500ms for faster interaction
       return () => clearTimeout(timer);
     }
   }, []);
