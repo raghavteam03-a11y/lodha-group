@@ -61,7 +61,7 @@ export const properties: Property[] = [
     bathrooms: 1,
     location: 'Lodha City',
     description: 'Entry-level wealth building. Your gateway to exclusive property investments.',
-    images: ['/images/vip-starter.png'],
+    images: ['/images/vip-starter.webp'],
     amenities: ['Basic Security', 'Water Supply', 'Parking'],
     available: true,
     vipLevel: 1,

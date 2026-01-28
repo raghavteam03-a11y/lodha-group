@@ -48,3 +48,38 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #B8860B;
 }
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  /* Reduce animations on mobile */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* Optimize touch interactions */
+* {
+  -webkit-tap-highlight-color: rgba(212, 175, 55, 0.2);
+  touch-action: manipulation;
+}
+
+/* Reduce motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Performance hints for off-screen content */
+.property-card,
+.announcement-popup {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+

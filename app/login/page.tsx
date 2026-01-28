@@ -37,11 +37,12 @@ export default function LoginPage() {
             {/* Left Side - Image */}
             <div className="hidden lg:flex lg:w-1/2 relative bg-[#1A1A1A]">
                 <Image
-                    src="/images/auth-bg.png"
+                    src="/images/auth-bg.webp"
                     alt="Luxury Real Estate"
                     fill
                     className="object-cover opacity-80"
-                    priority
+                    priority={false}
+                    loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
                 
@@ -128,7 +129,7 @@ export default function LoginPage() {
                 {/* Mobile Background Image (Visible only on small screens behind the card) */}
                 <div className="absolute inset-0 lg:hidden">
                     <Image
-                        src="/images/auth-bg.png"
+                        src="/images/auth-bg.webp"
                         alt="Background"
                         fill
                         className="object-cover opacity-5"

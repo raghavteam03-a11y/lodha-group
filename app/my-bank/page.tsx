@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function MyBankPage() {
@@ -171,10 +172,13 @@ export default function MyBankPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto text-center">
             <div className="bg-gradient-to-br from-[#F7E7CE] to-[#F4D03F]/30 rounded-2xl p-8">
-              <img 
-                src="/bank-security.png" 
+              <Image 
+                src="/bank-security.webp" 
                 alt="Secure Banking" 
-                className="w-48 h-48 mx-auto mb-4 object-contain"
+                width={192}
+                height={192}
+                loading="lazy"
+                className="mx-auto mb-4 object-contain"
               />
               <p className="text-gray-600 text-sm font-medium">Secure Bank Account Management</p>
               <p className="text-gray-500 text-xs mt-1">Your financial information is protected with bank-grade security</p>
