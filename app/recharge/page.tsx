@@ -10,7 +10,17 @@ export default function RechargePage() {
   const [selectedChannel, setSelectedChannel] = useState<'A' | 'B'>('A');
   const [balance, setBalance] = useState(0);
 
-  const quickAmounts = [500, 600, 700, 1000, 2000, 5000, 10000, 15000, 20000];
+  const quickAmounts = [
+    { amount: 500, link: 'https://onetapay.com/pp/MTYzMA==' },
+    { amount: 600, link: 'https://onetapay.com/pp/MTYzMQ==' },
+    { amount: 700, link: 'https://onetapay.com/pp/MTYzMg==' },
+    { amount: 1000, link: 'https://onetapay.com/pp/MTYzMw==' },
+    { amount: 2000, link: 'https://onetapay.com/pp/MTYzNA==' },
+    { amount: 5000, link: 'https://onetapay.com/pp/MTYzNQ==' },
+    { amount: 10000, link: 'https://onetapay.com/pp/MTYzNg==' },
+    { amount: 15000, link: 'https://onetapay.com/pp/MTYzNw==' },
+    { amount: 20000, link: 'https://onetapay.com/pp/MTYzOA==' },
+  ];
 
   useEffect(() => {
     // Fetch user and balance
@@ -112,21 +122,24 @@ export default function RechargePage() {
             Quick Select
           </label>
           <div className="grid grid-cols-3 gap-3">
-            {quickAmounts.map((amount) => (
-              <button
-                key={amount}
+            {quickAmounts.map((item) => (
+              <Link
+                key={item.amount}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => {
-                  setSelectedAmount(amount);
-                  setCustomAmount(amount.toString());
+                  setSelectedAmount(item.amount);
+                  setCustomAmount(item.amount.toString());
                 }}
                 className={`py-4 px-2 rounded-2xl font-bold transition-all text-center border-2 ${
-                  selectedAmount === amount
+                  selectedAmount === item.amount
                     ? 'bg-gradient-to-br from-[#D4AF37] to-[#B8860B] border-transparent text-white shadow-lg scale-[1.05] z-10'
                     : 'bg-white border-gray-100 text-[#B8860B] hover:border-[#D4AF37]'
                 }`}
               >
-                {formatPrice(amount)}
-              </button>
+                {formatPrice(item.amount)}
+              </Link>
             ))}
           </div>
         </div>
